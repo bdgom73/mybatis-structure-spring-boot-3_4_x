@@ -25,6 +25,7 @@ public class DefaultMemberService implements MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public void save(MemberSaveRequest request) {
         Member member = request.toEntity(passwordEncoder.encode(request.password()));
         memberMapper.save(member);
@@ -46,6 +47,7 @@ public class DefaultMemberService implements MemberService {
     }
 
     @Override
+    @Transactional
     public void join(Long teamId, Long memberId) {
         // 팀 검증
         Team team = Optional.ofNullable(teamMapper.findById(teamId))

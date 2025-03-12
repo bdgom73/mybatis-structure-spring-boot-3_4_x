@@ -18,6 +18,7 @@ public class DefaultTeamService implements TeamService {
     private final TeamMapper teamMapper;
 
     @Override
+    @Transactional
     public void create(TeamSaveRequest request) {
         Team team = request.toEntity();
         teamMapper.save(team);
