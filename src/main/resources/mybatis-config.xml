@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- 캐시 사용 여부 (true: 활성화, false: 비활성화) -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 자동 생성된 키 사용 여부 (예: MySQL의 AUTO_INCREMENT 컬럼에 적용) -->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!-- 기본 실행자 유형 (SIMPLE: 기본 실행, REUSE: Statement 재사용, BATCH: 배치 실행) -->
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <!-- 기본 SQL 실행 타임아웃 (단위: 초, 3000ms = 3초) -->
+        <setting name="defaultStatementTimeout" value="3000"/>
+    </settings>
+
+</configuration>

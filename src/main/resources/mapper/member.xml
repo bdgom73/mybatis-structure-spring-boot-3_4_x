@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.structure.mapper.MemberMapper">
+
+    <resultMap id="memberMap" type="com.example.structure.domain.Member">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="nickname" column="nickname"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <association property="team" resultMap="memberTeamMap"/>
+    </resultMap>
+
+    <resultMap id="memberTeamMap" type="com.example.structure.domain.Team">
+        <id property="id" column="team_id"/>
+        <result property="name" column="team_name"/>
+        <result property="createdAt" column="team_created_at"/>
+        <result property="updatedAt" column="team_updated_at"/>
+    </resultMap>
+
+    <select id="findById" resultMap="memberMap">
+        SELECT
+            m.id as id,
+            m.name as name,
+            m.email as email,
+            m.password as password,
+            m.nickname as nickname,
+            m.created_at as created_at,
+            m.updated_at as updated_at,
+        FROM member m
+        WHERE m.id = #{id}
+    </select>
+
+    <select id="findByIdWithTeam" resultMap="memberMap">
+        SELECT
+            m.id as id,
+            m.name as name,
+            m.email as email,
+            m.password as password,
+            m.nickname as nickname,
+            m.created_at as created_at,
+            m.updated_at as updated_at,
+            t.id as team_id,
+            t.name as team_name,
+            t.created_at as team_created_at,
+            t.updated_at as team_updated_at
+        FROM member m
+        LEFT JOIN team t ON m.id = t.member_id
+        WHERE m.id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="memberMap">
+        SELECT
+            m.id as id,
+            m.name as name,
+            m.email as email,
+            m.password as password,
+            m.nickname as nickname,
+            m.created_at as created_at,
+            m.updated_at as updated_at,
+        FROM member m
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO member(name, email, password, nickname, created_at, updated_at)
+        VALUES (#{name}, #{email}, #{password}, #{nickname}, now(), now())
+    </insert>
+
+    <update id="updateTeam">
+        UPDATE member
+            SET team_id = #{team.id},
+                updated_at = now()
+        WHERE id = #{member.id}
+    </update>
+</mapper>

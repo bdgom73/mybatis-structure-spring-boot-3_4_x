@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.structure.mapper.TeamMapper">
+    <resultMap id="teamMap" type="com.example.structure.domain.Team">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <collection property="members" resultMap="teamMemberMap"/>
+    </resultMap>
+
+    <resultMap id="teamMemberMap" type="com.example.structure.domain.Member">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="nickname" column="nickname"/>
+        <result property="email" column="email"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="findById" resultMap="teamMap">
+        SELECT
+            t.id as id,
+            t.name as name,
+            t.created_at as created_at,
+            t.updated_at as updated_at
+        FROM team t
+        WHERE t.id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="teamMap">
+        SELECT
+            t.id as id,
+            t.name as name,
+            t.created_at as created_at,
+            t.updated_at as updated_at
+        FROM team t
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO team (name, created_at, updated_at)
+        VALUES (#{name}, now(), now())
+    </insert>
+</mapper>
