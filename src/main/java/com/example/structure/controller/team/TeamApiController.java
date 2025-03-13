@@ -1,4 +1,4 @@
-package com.example.structure.controller;
+package com.example.structure.controller.team;
 
 import com.example.structure.global.api.ApiResponse;
 import com.example.structure.global.api.DataResponse;

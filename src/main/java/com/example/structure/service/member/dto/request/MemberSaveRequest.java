@@ -11,9 +11,9 @@ public record MemberSaveRequest(
 
     public Member toEntity(String encodedPassword) {
         return Member.builder()
-                .name(name)
-                .nickname(nickname)
-                .email(email)
+                .name(this.name)
+                .nickname(this.nickname)
+                .email(this.email)
                 .password(encodedPassword)
                 .build();
     }

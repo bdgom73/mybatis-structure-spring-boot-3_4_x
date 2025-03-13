@@ -28,7 +28,7 @@
             m.password as password,
             m.nickname as nickname,
             m.created_at as created_at,
-            m.updated_at as updated_at,
+            m.updated_at as updated_at
         FROM member m
         WHERE m.id = #{id}
     </select>
@@ -47,7 +47,7 @@
             t.created_at as team_created_at,
             t.updated_at as team_updated_at
         FROM member m
-        LEFT JOIN team t ON m.id = t.member_id
+        LEFT JOIN team t ON m.team_id = t.id
         WHERE m.id = #{id}
     </select>
 
@@ -59,7 +59,7 @@
             m.password as password,
             m.nickname as nickname,
             m.created_at as created_at,
-            m.updated_at as updated_at,
+            m.updated_at as updated_at
         FROM member m
     </select>
 

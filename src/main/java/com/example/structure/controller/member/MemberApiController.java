@@ -1,10 +1,11 @@
-package com.example.structure.controller;
+package com.example.structure.controller.member;
 
 import com.example.structure.global.api.ApiResponse;
 import com.example.structure.global.api.DataResponse;
 import com.example.structure.service.member.MemberService;
 import com.example.structure.service.member.dto.request.MemberSaveRequest;
 import com.example.structure.service.member.dto.response.MemberResponse;
+import com.example.structure.service.member.dto.response.MemberWithTeamResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,12 @@ public class MemberApiController {
     @GetMapping("/api/v1/members/{id}")
     public ResponseEntity<MemberResponse> getMember(@PathVariable Long id) {
         MemberResponse member = memberService.getMember(id);
+        return ResponseEntity.ok(member);
+    }
+
+    @GetMapping("/api/v1/members/{id}/all")
+    public ResponseEntity<MemberWithTeamResponse> getMemberWithTeam(@PathVariable Long id) {
+        MemberWithTeamResponse member = memberService.getMemberWithTeam(id);
         return ResponseEntity.ok(member);
     }
 

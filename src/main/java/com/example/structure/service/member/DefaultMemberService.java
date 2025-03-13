@@ -7,6 +7,7 @@ import com.example.structure.mapper.MemberMapper;
 import com.example.structure.mapper.TeamMapper;
 import com.example.structure.service.member.dto.request.MemberSaveRequest;
 import com.example.structure.service.member.dto.response.MemberResponse;
+import com.example.structure.service.member.dto.response.MemberWithTeamResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,13 @@ public class DefaultMemberService implements MemberService {
         Member member = Optional.ofNullable(memberMapper.findById(id))
                 .orElseThrow(() -> new IllegalArgumentException("찾을 수 없는 회원 입니다"));
         return MemberResponse.create(member);
+    }
+
+    @Override
+    public MemberWithTeamResponse getMemberWithTeam(Long id) {
+        Member member = Optional.ofNullable(memberMapper.findByIdWithTeam(id))
+                .orElseThrow(() -> new IllegalArgumentException("찾을 수 없는 회원 입니다"));
+        return MemberWithTeamResponse.create(member);
     }
 
     @Override
